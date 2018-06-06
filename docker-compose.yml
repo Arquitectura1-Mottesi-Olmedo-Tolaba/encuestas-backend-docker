@@ -1,0 +1,25 @@
+version: '3'
+services:
+  backend:
+    image: encuestas-backend
+    ports:
+      - "8080:8080"
+    networks:
+      - encuestas
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql/mysql-server:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: arqdb
+      MYSQL_USER: arq
+      MYSQL_PASSWORD: arq
+    ports:
+      - "3306:3306"
+    networks:
+      - encuestas
+
+networks:
+  encuestas:
