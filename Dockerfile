@@ -7,6 +7,7 @@ RUN apt-get update && \
 
 WORKDIR /tmp
 
+# Start encuestas-backend
 COPY pom.xml /tmp
 RUN mvn verify
 RUN rm pom.xml
@@ -15,10 +16,14 @@ WORKDIR /usr/src
 RUN git clone https://github.com/Arquitectura1-Mottesi-Olmedo-Tolaba/encuestas-backend.git
 
 WORKDIR /usr/src/encuestas-backend
-
+RUN mkdir newrelic
+COPY newrelic/ newrelic/.
 COPY jdbc.properties .
 RUN cp jdbc.properties src/main/resources/META-INF/jdbc.properties
 
 EXPOSE 8080
+ENV JAVA_OPTIONS="${JAVA_OPTIONS} -javaagent:/usr/src/encuestas-backend/newrelic/newrelic.jar"
+ENV MAVEN_OPTS="${MAVEN_OPTS} -javaagent:/usr/src/encuestas-backend/newrelic/newrelic.jar"
 
+RUN export 
 CMD [ "mvn", "jetty:run" ]
