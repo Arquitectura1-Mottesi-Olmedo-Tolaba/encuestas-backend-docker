@@ -3,8 +3,8 @@ services:
   backend:
     image: encuestas-backend
     environment:
-      MAX_MEMORY_JVM: 2048
-      START_MEMORY_JVM: 2048
+      MAX_MEMORY_JVM: 1536
+      START_MEMORY_JVM: 1536
     ports:
       - "8080:8080"
     networks:
@@ -15,7 +15,7 @@ services:
       resources:
         limits:
           cpus: '1'
-          memory: 2560M
+          memory: 2048M
 
   mysql:
     image: mysql/mysql-server:5.7
