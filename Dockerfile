@@ -21,12 +21,9 @@ COPY newrelic/ newrelic/.
 COPY jdbc.properties .
 RUN cp jdbc.properties src/main/resources/META-INF/jdbc.properties
 
-ENV MAX_MEMORY_JVM=1536
-ENV START_MEMORY_JVM=1536
-
 EXPOSE 8080
 ENV JAVA_OPTIONS="${JAVA_OPTIONS} -javaagent:/usr/src/encuestas-backend/newrelic/newrelic.jar"
-ENV MAVEN_OPTS="${MAVEN_OPTS} -javaagent:/usr/src/encuestas-backend/newrelic/newrelic.jar -Xmx${MAX_MEMORY_JVM}m -Xms${START_MEMORY_JVM}m"
+ENV MAVEN_OPTS="${MAVEN_OPTS} -javaagent:/usr/src/encuestas-backend/newrelic/newrelic.jar -Xmx1536m -Xms1536m"
 RUN export
 
 CMD [ "mvn", "jetty:run" ]

@@ -3,8 +3,7 @@ services:
   backend:
     image: encuestas-backend
     environment:
-      MAX_MEMORY_JVM: 1536
-      START_MEMORY_JVM: 1536
+      MAVEN_OPTS: -javaagent:/usr/src/encuestas-backend/newrelic/newrelic.jar -Xmx1536m -Xms1536m
     ports:
       - "8080:8080"
     networks:
